@@ -1,6 +1,6 @@
 </html>
 <head>
-  <title>Bangle.js Heartrate streaming graph</title>
+  <title>Heartrate</title>
 </head>
 <body>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -23,7 +23,7 @@
   })
   `;
 
-  // When we click the connect button...
+  
   var connection;
   document.getElementById("btnConnect").addEventListener("click", function() {
     // disconnect if connected already
@@ -51,7 +51,7 @@
       connection.write("reset();\n", function() {
         // Wait for it to reset itself
         setTimeout(function() {
-          // Now upload our code to it
+         
           connection.write("\x03\x10if(1){"+BANGLE_CODE+"}\n",
             function() { console.log("Ready..."); });
         }, 1500);
@@ -63,13 +63,13 @@
   var dps = []; // dataPoints
   var chart = new CanvasJS.Chart("chartContainer", {
     title :{
-      text: "Bangle.js HeartRate Monitoring Over Time"
+      text: "Heart Rate monitor by QNerk - v0.1"
     },
     axisY:{
       title: "Heart Rate",
     },
     axisX:{
-      title: "Time",
+      title: "Time - Czas upływa, a ty oglądasz wykresy...",
       valueFormatString: "HH:mm:ss",
     },
     data: [{
@@ -100,8 +100,7 @@
     chart.render();
   };
 
-  // When we get a line of data, check it and if it's
-  // from the heart rate monitor, update it
+
   function onLine(line) {
     console.log("RECEIVED:"+line);
     var d = line.split(",");
